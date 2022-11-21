@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { IJob } from "../interfaces";
 import { RootState } from "./store";
-import { transformJob } from "../util/helpers";
+import { getFromSessionStorage, transformJob } from "../util/helpers";
 
 export const selectJobsList = (state: RootState) => state.jobs.jobList;
 export const selectSelectedJob = (state: RootState) => state.jobs.selectedJob;
@@ -27,7 +27,9 @@ export interface JobsState {
   selectedJob: IJob | null;
 }
 
-const initialState: JobsState = {
+const storeFromStorage = getFromSessionStorage("state");
+
+const initialState: JobsState = storeFromStorage?.jobs || {
   jobList: [],
   savedJobs: [],
   selectedJob: null,

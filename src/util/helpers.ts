@@ -68,7 +68,10 @@ export const formatSalary = (salary: string): string => {
 
 //PHONE NUMBER FORMATTING
 export const formatPhone = (phone: string): string => {
-  return `${phone.slice(0, 3)} (${phone.slice(3, 6)}) ${phone.slice(6,9)} - ${phone.slice(9, 14)}`;
+  return `${phone.slice(0, 3)} (${phone.slice(3, 6)}) ${phone.slice(
+    6,
+    9
+  )} - ${phone.slice(9, 14)}`;
 };
 
 //GOOGLE MAPS
@@ -108,4 +111,24 @@ export const geocodeLocation = (
       return "error geocoding";
     }
   );
+};
+
+// STORAGE
+
+export const saveToSessionStorage = (key: string, value: any): void => {
+  try {
+    const serializedValue = JSON.stringify(value);
+    sessionStorage.setItem(key, serializedValue);
+  } catch (err) {}
+};
+
+export const getFromSessionStorage = (
+  key: string,
+): any | undefined => {
+  try {
+    const serializedValue = sessionStorage.getItem(key) || "";
+    return JSON.parse(serializedValue);
+  } catch (err) {
+    return undefined;
+  }
 };

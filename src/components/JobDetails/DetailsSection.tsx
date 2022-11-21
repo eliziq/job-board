@@ -82,9 +82,9 @@ const DetailsSection: FC<DetailSectionProps> = ({
         Our physicians enjoy a wide range of benefits, including:
       </p>
       <ul className={styles.paragraph}>
-        {benefitsDesc.map((benefit) => {
+        {benefitsDesc.map((benefit, i) => {
           return (
-            <li className={`${styles.paragraph} flex mr-2`}>
+            <li className={`${styles.paragraph} flex mr-2`} key={i}>
               <img src={bullet} alt="" className="mr-2" />
               {benefit}
             </li>
